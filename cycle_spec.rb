@@ -26,6 +26,13 @@ describe Cycle do
     cycle.start_of_cycle(point).should ==  anchor + 100
   end
 
+  it "should show fraction into cycle" do
+    anchor = Time.new(2012,12,12,12,00)
+    point = Time.new(2012,12,12,12,30)
+    cycle = Cycle.new(anchor,60) 
+    cycle.fraction_of_cycle(point).should ==  (1/2)
+  end
+
   it "should work out the first day start of cycle" do
     anchor = Time.new(2012,12,21,11,12)
     point = Time.new(2012,12,26,15,9)
@@ -39,6 +46,22 @@ describe Cycle do
     cycle = Cycle.new(anchor,60*60*24*1000) #1000 days
     cycle.day_of_cycle(point).should ==  5
   end  
+
+  it "should return zero when not hit first day " do
+    anchor = Time.new(2012,12,21,11,12)
+    point = Time.new(2012,12,21,12,00)
+    cycle = Cycle.new(anchor,60*60*24*1000) #1000 days
+    cycle.day_of_cycle(point).should == 0
+  end
+
+  it "should return zero when not hit first day " do
+    anchor = Time.new(2012,12,21,11,12)
+    point = Time.new(2012,12,21,12,00)
+    cycle = Cycle.new(anchor,60*60*24*1000) #1000 days
+    cycle.day_of_cycle(point).should == 0
+  end   
+
+
 
 
 end
