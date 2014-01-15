@@ -20,6 +20,10 @@ class Cycle
 
   def start_of_cycle(point_in_time)
     @anchor + (cycles_since_anchor(point_in_time) * @length)
+  end
+
+  def start_of_next_cycle(point_in_time)
+    start_of_cycle(point_in_time) + @length
   end 
 
   def first_day_start_of_cycle(point_in_time)

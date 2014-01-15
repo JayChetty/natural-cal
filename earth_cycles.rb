@@ -17,13 +17,30 @@ class EarthCycles
     @month = Cycle.new(A_NEW_MOON, MONTH_IN_SECONDS)
   end
 
+  def year
+    @year.cycles_since_anchor(@point_in_time)
+  end
+
   def day_of_year
     @year.day_of_cycle(@point_in_time)
   end
 
   def day_of_month
     @month.day_of_cycle(@point_in_time)
+  end
+
+  def first_new_moon_of_year
+    start_of_year = @year.start_of_cycle(@point_in_time)
+    @month.start_of_next_cycle(start_of_year)
   end  
+
+  def month_of_year
+    ((@point_in_time - first_new_moon_of_year)/MONTH_IN_SECONDS).ceil
+  end
+
+  def to_s
+    "The #{day_of_month} day of the #{month_of_year} month #{year}"
+  end
 end
 
 #

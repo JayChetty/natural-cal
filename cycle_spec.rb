@@ -26,11 +26,18 @@ describe Cycle do
     cycle.start_of_cycle(point).should ==  anchor + 100
   end
 
+  it "should work out the start of next cycle" do
+    anchor = Time.new(2012,12,21,12,00,00)
+    point = Time.new(2012,12,21,12,00,30)
+    cycle = Cycle.new(anchor,60)
+    cycle.start_of_next_cycle(point).should ==  point = Time.new(2012,12,21,12,01,00)
+  end  
+
   it "should show fraction into cycle" do
-    anchor = Time.new(2012,12,12,12,00)
-    point = Time.new(2012,12,12,12,30)
+    anchor = Time.new(2012,12,12,12,00,00)
+    point = Time.new(2012,12,12,12,00,30)
     cycle = Cycle.new(anchor,60) 
-    cycle.fraction_of_cycle(point).should ==  (1/2)
+    cycle.fraction_of_cycle(point).should ==  0.5
   end
 
   it "should work out the first day start of cycle" do
